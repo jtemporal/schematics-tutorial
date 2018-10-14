@@ -10,6 +10,10 @@ class Cachorrinho(Model):
                       serialized_name="name")
     cor = StringType(required=True, deserialize_from="fur",
                       serialized_name="fur")
+    def validate_nome(self, data, value):
+        if data['nome'].capitalize() != data['nome']:
+            raise ValidationError('Pet name is not capitalized!')
+        return value
 
 
 class Pessoa(Model):
